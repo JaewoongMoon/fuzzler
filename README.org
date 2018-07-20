@@ -4,8 +4,8 @@
 Simple Test for XSS and SQL Injection.
 
 ** XSS test
-[[.xss-test.png]]
+[[./xss-test.png]]
 
 ** SQL Injection test
-[[.sql-test.png]]
+[[./sql-test.png]]
 
