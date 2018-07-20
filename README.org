@@ -1,0 +1,11 @@
+#+TITLE: Fuzzler
+
+* Summary
+Simple Test for XSS and SQL Injection.
+
+** XSS test
+[[.xss-test.png]]
+
+** SQL Injection test
+[[.sql-test.png]]
+
