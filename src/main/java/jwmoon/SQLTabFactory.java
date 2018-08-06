@@ -72,13 +72,14 @@ public class SQLTabFactory implements IMessageEditorTabFactory{
             }else{
                 IRequestInfo reqInfo = helpers.analyzeRequest(content);
                 List<IParameter> params = reqInfo.getParameters();
+                byte paramType = reqInfo.getMethod().equals("GET")? IParameter.PARAM_URL : IParameter.PARAM_BODY;
                 
                 // sql injection payloads
                 for(int i=0; i < params.size(); i++) {
                 	IParameter param = params.get(i);
+                	IParameter newParam = helpers.buildParameter(param.getName(), "'", paramType);
                 	if(!param.getName().equals("JSESSIONID")) {
-	                	content = helpers.updateParameter(
-	                			content, helpers.buildParameter(param.getName(), "'", IParameter.PARAM_BODY));
+	                	content = helpers.updateParameter(content, newParam);
                 	}
                 }
                 txtInput.setText(content);

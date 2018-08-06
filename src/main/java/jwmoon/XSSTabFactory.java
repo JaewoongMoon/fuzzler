@@ -80,6 +80,7 @@ public class XSSTabFactory implements IMessageEditorTabFactory{
             }else{
                 IRequestInfo reqInfo = helpers.analyzeRequest(content);
                 List<IParameter> params = reqInfo.getParameters();
+                byte paramType = reqInfo.getMethod().equals("GET")? IParameter.PARAM_URL : IParameter.PARAM_BODY;
                 
                 // xss payloads
                 String xssStart = "\"/><script>alert(";
@@ -88,8 +89,12 @@ public class XSSTabFactory implements IMessageEditorTabFactory{
                 for(int i=0; i < params.size(); i++) {
                 	IParameter param = params.get(i);
                 	if(!param.getName().equals("JSESSIONID")) {
-	                	String payload = xssStart + (num++) + xssEnd;
-	                	content = helpers.updateParameter(content, helpers.buildParameter(param.getName(), payload, IParameter.PARAM_BODY));
+                		IParameter newParam = helpers.buildParameter(
+            						param.getName(), 
+            						xssStart + (num++) + xssEnd,  //payload
+            						paramType);
+	                	content = helpers.updateParameter(content, newParam);
+	                	//stdout.println("parameter [" + param.getName() + "]'s value setted to " + newParam.getValue());
                 	}
                 }
                 txtInput.setText(content);

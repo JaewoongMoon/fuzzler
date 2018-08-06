@@ -15,7 +15,7 @@ public class BurpExtender implements IBurpExtender{
     {
     	PrintWriter stdout = new PrintWriter(callbacks.getStdout(), true);
     	
-        callbacks.setExtensionName("Fuzzler");
+        callbacks.setExtensionName("Fuzzler 1.0.2");
         factory1 = new XSSTabFactory(callbacks);
         factory2 = new SQLTabFactory(callbacks);
         callbacks.registerMessageEditorTabFactory(factory1);
