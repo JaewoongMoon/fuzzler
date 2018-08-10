@@ -78,7 +78,7 @@ public class SQLTabFactory implements IMessageEditorTabFactory{
                 for(int i=0; i < params.size(); i++) {
                 	IParameter param = params.get(i);
                 	IParameter newParam = helpers.buildParameter(param.getName(), "'", paramType);
-                	if(!param.getName().equals("JSESSIONID")) {
+                	if(param.getType() != IParameter.PARAM_COOKIE && !param.getName().contains("_csrf")) {
 	                	content = helpers.updateParameter(content, newParam);
                 	}
                 }

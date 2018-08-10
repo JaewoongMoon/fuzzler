@@ -88,7 +88,7 @@ public class XSSTabFactory implements IMessageEditorTabFactory{
                 int num = 1;
                 for(int i=0; i < params.size(); i++) {
                 	IParameter param = params.get(i);
-                	if(!param.getName().equals("JSESSIONID")) {
+                	if(param.getType() != IParameter.PARAM_COOKIE && !param.getName().contains("_csrf")) {
                 		IParameter newParam = helpers.buildParameter(
             						param.getName(), 
             						xssStart + (num++) + xssEnd,  //payload
